@@ -6,7 +6,7 @@ import Layout from '../components/Layout'
 import InterviewItems from '../components/InterviewItems'
 
 const Career = ({ data }) => {
-  const post = data.wordpressPage.acf
+  const post = data.allWordpressPage.edges[0].node.acf
   console.log(post)
 
   return (
@@ -69,26 +69,32 @@ const Career = ({ data }) => {
             </div>
           </div>
         </section>
-        <InterviewItems />
+        <div class="bottom-interview-link">
+          <InterviewItems />
+        </div>
+
       </Layout>
     </div>
   )
 }
 
 export const query = graphql`
- {
- wordpressPage(wordpress_id: {eq: 6}) {
-    id
-    acf {
-      job_info {
-        job
-        job_categorys {
-          job_category {
-            title
-            url
+  {
+  allWordpressPage(filter: {slug: {eq: "career"}}) {
+    edges {
+      node {
+        acf {
+          job_info {
+            job
+            job_categorys {
+              job_category {
+                title
+                url
+              }
+            }
+            job_discription
           }
         }
-        job_discription
       }
     }
   }

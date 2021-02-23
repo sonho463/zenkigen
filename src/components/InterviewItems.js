@@ -1,53 +1,63 @@
-import React from 'react'
-import { graphql, StaticQuery, Link} from 'gatsby'
+import React from "react"
+import { Link, StaticQuery, graphql } from "gatsby"
+import './style.css'
 
-const InterviewItems = () => {
-  return (
-    <StaticQuery query={graphql`
-    {
-      allWordpressWpInterview {
-        edges {
-          node {
-            acf {
-              detail_cat
-              english_name
-              gallery_image1 {
-                source_url
+
+const InterviewItems = () => (
+  <StaticQuery
+    query={graphql`
+            query {
+              allWordpressWpInterview(filter: {acf: {name: {eq: "小荷田 成尭"}}}) {
+                edges {
+                  node {
+                    slug
+                    wordpress_id
+                    acf {
+                      detail_cat
+                      maincopy
+                      main_image_pc {
+                        source_url
+                      }
+                      name
+                    }
+                  }
+                }
               }
-              gallery_image2 {
-                source_url
-              }
-              main_image_pc {
-                source_url
-              }
-              main_image_sp {
-                source_url
-              }
-              top_thumbnail {
-                source_url
-              }
-              name
-              maincopy
             }
-            slug
-            title
-            content
-            id
-          }
-        }
-      }
-    }
-    `} render={props => props.allWordpressWpInterview.edges.map(InterviewItems => (
-      <div key={InterviewItems.node.id}>
-        <h2>{InterviewItems.node.title}</h2>
-        <img src={InterviewItems.node.acf.gallery_image1.source_url} />
-        <div dangerouslySetInnerHTML={{ __html: InterviewItems.node.content }} />
-        <Link to={`/interview/${InterviewItems.node.slug}`}>
-          Read more
-        </Link>
-      </div>
-    ))}/>
-  )
-}
+        `}
+    render={props => (
 
-export default InterviewItems;
+
+        <>
+      {
+          props.allWordpressWpInterview.edges.map(page => {
+            console.log(page.node.acf)
+            return (
+            <div key={page.node.slug}>
+
+                <div className={`bottom-interview-container ${page.node.slug}`} >
+                  <Link to={`/interview/${page.node.slug}`}>
+                    <div className ="overlay"></div>
+                    <div className ="dot-img"></div>
+                    <div className ="bottom-interview-meta">
+                      <p className ="interview-title">{page.node.acf.maincopy}</p>
+                      <p className ="interview-name">{page.node.acf.name}</p>
+                      <p className ="interview-job">{page.node.acf.detail_cat}</p>
+                    </div>
+                  </Link>
+                </div>
+
+            </div>
+            )
+          })
+      }
+      </>
+    )}
+  />
+)
+
+export default InterviewItems
+
+
+
+
