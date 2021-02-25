@@ -11,7 +11,6 @@ const slash = require(`slash`)
 // Will create pages for WordPress posts (route : /post/{slug})
 exports.createPages = ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions
-  createRedirect({ fromPath: '/', toPath: '/home', redirectInBrowser: true, isPermanent: true })
   return new Promise((resolve, reject) => {
     // The “graphql” function allows us to run arbitrary
     // queries against the local WordPress graphql schema. Think of
@@ -68,7 +67,7 @@ exports.createPages = ({ graphql, actions }) => {
       })
       // ==== END PAGES ====
 
-      // ==== Interview ====
+      // ==== INTERVIEW ====
       .then(() => {
         graphql(
           `
@@ -111,20 +110,20 @@ exports.createPages = ({ graphql, actions }) => {
             console.log(result.errors)
             reject(result.errors)
           }
-          const interviewTemplate = path.resolve("./src/templates/interview.js")
-          // We want to create a detailed page for each
-          // post node. We'll just use the WordPress Slug for the slug.
-          // The Post ID is prefixed with 'POST_'
-          _.each(result.data.allWordpressWpInterview.edges, edge => {
+          const { allWordpressWpInterview } = result.data
+          const postTemplate = path.resolve('./src/templates/interview.js') // テンプレートのパス
+          allWordpressWpInterview.edges.forEach(edge => {
             createPage({
-              path: `/interview/${edge.node.slug}/`,
-              component: slash(interviewTemplate),
-              context: edge.node,
+              path: `/interview/${edge.node.slug}/`, // ページを紐付けるURL
+              component: slash(interviewTemplate),  // もととなるページテンプレートを指定
+              context: {
+                edge.node, // templateにわたす変数
+              },
             })
           })
         })
       })
-      // ==== END PORTFOLIO ====
+      // ==== END INTERVIEW ====
       // ==== NEWS POSTS ====
       .then(() => {
         graphql(`

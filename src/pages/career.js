@@ -69,8 +69,15 @@ const Career = ({ data }) => {
             </div>
           </div>
         </section>
-        <div class="bottom-interview-link">
-          <InterviewItems />
+        {/*  インタビュー部分  */}
+        <section className="sec message">
+          <div className="sec-container">
+            <h2 className="sc-f show">Interview</h2>
+          </div>
+        </section>
+        <div className="bottom-interview-link">
+          <InterviewItems intervieweeName="konita" />
+          <InterviewItems intervieweeName="yanagihara" />
         </div>
 
       </Layout>

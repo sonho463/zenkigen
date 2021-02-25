@@ -2998,6 +2998,7 @@ footer #page-top.show a {
 }
 
 .area-news .area-container dl dt {
+	margin-bottom: 8px;
 	width: 170px;
 }
 
