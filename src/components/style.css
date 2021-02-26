@@ -3773,6 +3773,7 @@ footer #page-top.show a {
 	font-weight: 700;
 	line-height: 1.8;
 	margin-bottom: 16px;
+	position: relative;
 }
 
 .interview .sec.interview-sec .sec-interview-container .interview-q:before {

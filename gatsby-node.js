@@ -77,6 +77,7 @@ exports.createPages = ({ graphql, actions }) => {
                   node {
                     acf {
                       detail_cat
+                      job_cat
                       english_name
                       gallery_image1 {
                         source_url
@@ -111,14 +112,12 @@ exports.createPages = ({ graphql, actions }) => {
             reject(result.errors)
           }
           const { allWordpressWpInterview } = result.data
-          const postTemplate = path.resolve('./src/templates/interview.js') // テンプレートのパス
+          const interviewTemplate = path.resolve('./src/templates/interview.js') // テンプレートのパス
           allWordpressWpInterview.edges.forEach(edge => {
             createPage({
-              path: `/interview/${edge.node.slug}/`, // ページを紐付けるURL
-              component: slash(interviewTemplate),  // もととなるページテンプレートを指定
-              context: {
-                edge.node, // templateにわたす変数
-              },
+              path: `/interview/${edge.node.slug}/`,
+              component: slash(interviewTemplate),
+              context: edge.node
             })
           })
         })
