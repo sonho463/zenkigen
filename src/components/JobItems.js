@@ -1,5 +1,6 @@
 import React from "react"
 import { Link, StaticQuery, graphql } from "gatsby"
+import { divide } from "lodash"
 
 
 
@@ -32,17 +33,19 @@ const JobItems = ({ jobName }) => (
         return n.job.includes(jobName)
       })
       console.log(jobcat.job_categorys)
-      var obj = {}
-      obj =jobcat.job_categorys.map((categorys, j) => {
 
-        <li key={j} >
+      const obj =jobcat.job_categorys.map((categorys, j) => {
+        return(
+          <li key={j} >
             <a href={categorys.job_category.url} target="_blank" rel="noopener">{categorys.job_category.title}</a>
           </li>
-
-
+        )
       })
-      console.log(obj)
-      return obj;
+
+        return(
+          <div>{obj}</div>
+        )
+
         }
     }
 

@@ -69,9 +69,9 @@ class InterviewTemplate extends Component {
         <section className="sec interview-sec sc-f">
           <div className="sec-interview-container">
             <h4>{post.acf.job_cat}の募集職種</h4>
-
-            <JobItems jobName={post.acf.job_cat} />
-
+            <ul className="carrer-entry-link">
+              <JobItems jobName={post.acf.job_cat} />
+            </ul>
           </div>
         </section>
 

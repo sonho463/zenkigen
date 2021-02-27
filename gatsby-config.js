@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby + WordPress Starter',
+    title: '採用情報 株式会社ZENKIGEN',
   },
   plugins: [
     'gatsby-plugin-react-helmet',

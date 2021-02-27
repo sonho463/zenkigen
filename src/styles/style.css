@@ -42,12 +42,12 @@ table {
  */
 @font-face {
 	font-family: "Akkurat-Bold";
-	src: url("./font/AkkuratPro-Bold.woff2") format("woff2"), url("./font/AkkuratPro-Bold.woff") format("woff");
+	src: url("../font/AkkuratPro-Bold.woff2") format("woff2"), url("../font/AkkuratPro-Bold.woff") format("woff");
 }
 
 @font-face {
 	font-family: "Akkurat-Regular";
-	src: url("./font/AkkuratPro-Regular.woff2") format("woff2"), url("./font/AkkuratPro-Regular.woff") format("woff");
+	src: url("../font/AkkuratPro-Regular.woff2") format("woff2"), url("../font/AkkuratPro-Regular.woff") format("woff");
 }
 
 /* ------------------------------------------------------ */
