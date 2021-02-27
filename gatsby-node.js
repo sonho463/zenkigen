@@ -123,6 +123,45 @@ exports.createPages = ({ graphql, actions }) => {
         })
       })
       // ==== END INTERVIEW ====
+      // ==== MESSAGE ====
+      .then(() => {
+        graphql(
+          `
+           {
+               allWordpressWpMessage {
+                nodes {
+                  slug
+                  title
+                  content
+                  id
+                  acf {
+                    maincopy
+                    english_name
+                    name
+                    slug
+                    detail_cat
+                  }
+                }
+              }
+            }
+          `
+        ).then(result => {
+          if (result.errors) {
+            console.log(result.errors)
+            reject(result.errors)
+          }
+          const { allWordpressWpMessage } = result.data
+          const messageTemplate = path.resolve('./src/templates/message.js') // テンプレートのパス
+          allWordpressWpMessage.nodes.forEach(node => {
+            createPage({
+              path: `/message/${node.slug}/`,
+              component: slash(messageTemplate),
+              context: node
+            })
+          })
+        })
+      })
+      // ==== END MESSAGE ====
       // ==== NEWS POSTS ====
       .then(() => {
         graphql(`

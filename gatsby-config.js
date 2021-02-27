@@ -28,6 +28,7 @@ module.exports = {
           "**/users",
           "**/tags",
           "**/interview",
+          "**/message",
         ],
       },
     },

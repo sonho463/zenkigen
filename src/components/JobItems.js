@@ -29,22 +29,23 @@ const JobItems = ({ jobName }) => (
       console.log(props)
       console.log(jobName)
       const jobcat = props.allWordpressPage.nodes[0].acf.job_info.find(n => {
-        return n.job.includes("エンジニア職")
+        return n.job.includes(jobName)
       })
+      console.log(jobcat.job_categorys)
+      var obj = {}
+      obj =jobcat.job_categorys.map((categorys, j) => {
 
-      console.log(jobcat)
-
-      jobcat.job_categorys.map((categorys, j) => {
-        return (
-          <li key={j} >
+        <li key={j} >
             <a href={categorys.job_category.url} target="_blank" rel="noopener">{categorys.job_category.title}</a>
           </li>
-        );
+
+
       })
-
-
+      console.log(obj)
+      return obj;
+        }
     }
-    }
+
   />
 )
 
